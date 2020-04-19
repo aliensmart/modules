@@ -44,7 +44,7 @@ print("shape of the array is ", c.shape)
 c = np.array([(1, 2, 3), (4, 5, 6)])
 print("reshaped array is ", c.reshape(3, 2))
 
-#this is how to slice the array
+#====================================================this is how to slice the array============================================================================
 c = np.array([(1, 2, 3), (4, 5, 6)])
 print(c[0, 2])
 
@@ -69,3 +69,4 @@ print("sum is ", c.sum())
 c = np.array([(1, 2, 3), (4, 5, 6)])
 print("sum of the row is ", c.sum(axis=0)) # row is axis = 0 and columns is axis = 1
 print("sum of the column is ", c.sum(axis=1))
+
