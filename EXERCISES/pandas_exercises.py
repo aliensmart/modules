@@ -95,3 +95,91 @@ ser = pd.Series(np.random.randint(1, 5, [12]))
 print("Top 2 Freq:", ser.value_counts())
 ser[~ser.isin(ser.value_counts().index[:2])] = 'Other'
 print(ser)
+
+
+
+#==============================================================================================================================================
+#How to bin a numeric series to 10 groups of equal size?
+#Bin the series ser into 10 equal deciles and replace the values with the bin name.
+ser = pd.Series(np.random.random(20))#random returns float between 0.0 to 1.0
+print(ser)
+re = pd.qcut(ser, q=[0, .10, .20, .3, .4, .5, .6, .7, .8, .9, 1],
+              labels=['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th'])
+print(re)
+
+
+
+#================================================================================================================================================
+# How to convert a numpy array to a dataframe of given shape? (L1)
+# Reshape the series ser into a dataframe with 7 rows and 5 columns
+ser = pd.Series(np.random.randint(1, 10, 35))#return a random integer randint(low, high, size)
+df = pd.DataFrame(ser.values.reshape(7,5))
+
+#================================================================================================================================================
+# How to find the positions of numbers that are multiples of 3 from a series?
+# Find the positions of numbers that are multiples of 3 from ser
+ser = pd.Series(np.random.randint(1, 20, 7))
+ind = np.argwhere(ser % 3==0)
+
+
+#=============================================================================================================================================
+#How to extract items at given positions from a series
+#From ser, extract the items at positions in list pos.
+ser = pd.Series(list('abcdefghijklmnopqrstuvwxyz'))
+pos = [0, 4, 8, 14, 20]
+ser.take(pos)
+
+
+#===============================================================================================================================================
+#How to stack two series vertically and horizontally ?
+# Get the positions of items of ser2 in ser1 as a list.
+ser1 = pd.Series([10, 9, 6, 5, 3, 1, 12, 8, 13])
+ser2 = pd.Series([1, 3, 10, 13])
+
+ser3 = [np.where(i==ser1)[0].tolist() for i in ser2]
+print(ser3)
+
+
+#===============================================================================================================================================
+#How to compute the mean squared error on a truth and predicted series?
+#Compute the mean squared error of truth and pred series
+truth = pd.Series(range(10))
+pred = pd.Series(range(10) + np.random.random(10))
+
+np.mean((truth-pred)**2)
+
+
+
+#===============================================================================================================================================
+#How to convert the first character of each element in a series to uppercase?
+#Change the first character of each word to upper case in each word of ser.
+ser = pd.Series(['how', 'to', 'kick', 'ass?'])
+# Solution 1
+ser.map(lambda x: x.title())
+
+# Solution 2
+ser.map(lambda x: x[0].upper() + x[1:])
+
+# Solution 3
+pd.Series([i.title() for i in ser])
+
+
+
+#===============================================================================================================================================
+#How to calculate the number of characters in each word in a series?
+ser = pd.Series(['how', 'to', 'kick', 'ass?'])
+# Solution 1
+ser.map(lambda x: len(x))
+
+#===============================================================================================================================================
+#How to compute difference of differences between consequtive numbers of a series?
+#Difference of differences between the consequtive numbers of ser.
+ser = pd.Series([1, 3, 6, 10, 15, 21, 27, 35])
+dif = ser.diff().tolist()
+diff = ser.diff().diff().tolist()
+
+
+
+
+
+
